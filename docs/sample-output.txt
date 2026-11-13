@@ -1,0 +1,15 @@
+100  10.2.1.40 -> evil-tunnel.net  (120 queries, 120 unique names)
+       - very long subdomains (mean 49 characters)
+       - high-entropy labels (4.5 bits per character)
+       - almost every query is a new name (120 unique)
+       - 100% of labels look hex, base32 or base64 encoded
+       - 100% of queries are TXT, NULL, CNAME or MX
+       - sustained rate of 1.2 queries per second
+ 85  10.2.5.2 -> cdn-assets.example  (80 queries, 80 unique names)
+       - very long subdomains (mean 32 characters)
+       - high-entropy labels (3.6 bits per character)
+       - almost every query is a new name (80 unique)
+       - 100% of labels look hex, base32 or base64 encoded
+ 64  10.2.3.8 -> (many random domains)  (60 queries, 60 unique names)
+       - 60 NXDOMAIN answers for 60 different random-looking names (3.6 bits per character)
+       - consistent with a domain generation algorithm searching for its command server

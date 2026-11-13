@@ -1,0 +1,22 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m unittest discover -s tests
+      - name: Sample outputs are up to date
+        run: |
+          python examples/make_sample.py; git diff --exit-code examples/queries.csv
+          python -m dns_exfil_hunter examples/queries.csv > /tmp/o.txt; diff /tmp/o.txt docs/sample-output.txt
+          python -m dns_exfil_hunter examples/queries.csv --html > /tmp/o.html; diff /tmp/o.html site/index.html
